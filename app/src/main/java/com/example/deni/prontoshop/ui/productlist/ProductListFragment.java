@@ -14,6 +14,8 @@ import com.example.deni.prontoshop.R;
  */
 public class ProductListFragment extends Fragment {
 
+    private View mRootView;
+
 
     public ProductListFragment() {
         // Required empty public constructor
@@ -24,7 +26,9 @@ public class ProductListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product_list, container, false);
+        mRootView = inflater.inflate(R.layout.fragment_product_list, container, false);
+
+        return mRootView;
     }
 
 }
