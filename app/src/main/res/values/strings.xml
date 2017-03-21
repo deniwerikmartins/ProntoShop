@@ -15,4 +15,10 @@
     <string name="payment_type_paypal">Paypal</string>
     <string name="clear">Clear</string>
     <string name="checkout">Checkout</string>
+    <string name="category">Category</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_description">Product Image</string>
+    <string name="qty">qty</string>
+    <string name="delete">delete</string>
+    <string name="image_for_add_itens_to_cart">add itens to cart</string>
 </resources>
