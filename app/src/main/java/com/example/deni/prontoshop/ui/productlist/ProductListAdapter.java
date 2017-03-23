@@ -73,7 +73,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
         @BindView(R.id.product_image)
         ImageView productImage;
@@ -99,7 +99,15 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         @Override
         public void onClick(View v) {
+            Product selectedProduct = mProducts.get(getLayoutPosition());
+            mListener.onSelectProduct(selectedProduct);
+        }
 
+        @Override
+        public boolean onLongClick(View v) {
+            Product clickedProduct = mProducts.get(getLayoutPosition());
+            mListener.onLongClickProduct(clickedProduct);
+            return true;
         }
     }
 
