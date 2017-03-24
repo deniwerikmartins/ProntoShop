@@ -21,4 +21,5 @@
     <string name="qty">qty</string>
     <string name="delete">delete</string>
     <string name="image_for_add_itens_to_cart">add itens to cart</string>
+    <string name="dialog_title">Title</string>
 </resources>

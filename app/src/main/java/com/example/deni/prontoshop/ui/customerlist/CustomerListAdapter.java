@@ -14,7 +14,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import com.example.deni.prontoshop.R;
+import com.example.deni.prontoshop.core.listeners.OnCustomerSelectedListener;
 import com.example.deni.prontoshop.model.Customer;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,12 +29,14 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
 
     private List<Customer> mCustomers;
     private final Context mContext;
+    private final OnCustomerSelectedListener mListener;
     private boolean shouldHighlightSelectedCustomer = false;
     private int selectedPosition = 0;
 
-    public CustomerListAdapter(List<Customer> mCustomers, Context mContext) {
-        this.mCustomers = mCustomers;
-        this.mContext = mContext;
+    public CustomerListAdapter(List<Customer> customers, Context context, OnCustomerSelectedListener listener) {
+        this.mCustomers = customers;
+        this.mContext = context;
+        this.mListener = listener;
     }
 
 
@@ -78,14 +82,9 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
-        @BindView(R.id.image_view_customer_head_shot)
-        ImageView customerHeadShot;
-
-        @BindView(R.id.text_view_customer_email)
-        TextView customerEmail;
-
-        @BindView(R.id.text_view_customer_name)
-        TextView customerName;
+        @BindView(R.id.image_view_customer_head_shot) ImageView customerHeadShot;
+        @BindView(R.id.text_view_customer_email) TextView customerEmail;
+        @BindView(R.id.text_view_customer_name) TextView customerName;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -96,12 +95,18 @@ public class CustomerListAdapter extends RecyclerView.Adapter<CustomerListAdapte
 
         @Override
         public void onClick(View v) {
-
+            shouldHighlightSelectedCustomer = true;
+            selectedPosition = getLayoutPosition();
+            Customer selectedCustomer = mCustomers.get(selectedPosition);
+            mListener.onSelectCustomer(selectedCustomer);
+            notifyDataSetChanged();
         }
 
         @Override
         public boolean onLongClick(View v) {
-            return false;
+            Customer selectedCustomer = mCustomers.get(selectedPosition);
+            mListener.onLongClickCustomer(selectedCustomer);
+            return true;
         }
     }
 }

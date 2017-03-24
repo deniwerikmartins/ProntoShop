@@ -75,20 +75,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
-        @BindView(R.id.product_image)
-        ImageView productImage;
-        @BindView(R.id.text_view_product_name)
-        TextView productName;
-        @BindView(R.id.textview_product_category)
-        TextView category;
-        @BindView(R.id.textview_product_description)
-        TextView description;
-        @BindView(R.id.image_view_add_to_cart_button)
-        ImageView addToCartButton;
-        @BindView(R.id.textview_product_price)
-        TextView productPrice;
-
-
+        @BindView(R.id.product_image) ImageView productImage;
+        @BindView(R.id.text_view_product_name) TextView productName;
+        @BindView(R.id.textview_product_category) TextView category;
+        @BindView(R.id.textview_product_description) TextView description;
+        @BindView(R.id.image_view_add_to_cart_button) ImageView addToCartButton;
+        @BindView(R.id.textview_product_price) TextView productPrice;
 
         public ViewHolder(View itemView) {
             super(itemView);
