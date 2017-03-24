@@ -10,29 +10,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_weight="1"
-            android:paddingLeft="@dimen/margin_padding_tiny"
-            android:paddingRight="@dimen/margin_padding_tiny">
+            android:orientation="vertical"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/checkout_list_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/transparent"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"/>
+
 
             <TextView
                 android:id="@+id/empty_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/primary"
-                android:text="@string/no_customer_found"
-                android:padding="@dimen/margin_padding_normal"
+                android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
+                android:padding="15dp"
+                android:text="@string/no_item_found"
+                android:textColor="@color/primary"
                 android:textStyle="italic"
-                android:visibility="gone"
-                android:fontFamily="sans-serif-condensed"/>
+                android:visibility="gone"/>
 
         </LinearLayout>
 
@@ -48,22 +49,21 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:text="@string/label_sub_total"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:text="@string/label_sub_total"/>
-
-            <TextView
-                android:id="@+id/text_view_of_sub_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="right"
-                android:paddingRight="5dp"
-                android:text="@string/label_zero_dollar"/>
+                <TextView
+                    android:id="@+id/text_view_sub_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:text="@string/label_zero_dollar"/>
             </LinearLayout>
 
             <LinearLayout
@@ -71,7 +71,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -95,7 +94,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -158,12 +156,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/margin_padding_tiny"
-            android:layout_marginTop="@dimen/margin_padding_tiny"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/clear_card_button"
+                android:id="@+id/clear_cart_button"
                 style="@style/BottomBarButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -173,15 +171,19 @@
             <View
                 android:layout_width="8dp"
                 android:layout_height="match_parent"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent" />
+
+
 
             <Button
-                android:id="@+id/checkout_card_button"
+                android:id="@+id/checkout_cart_button"
                 style="@style/BottomBarButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/checkout"/>
+
+
 
         </LinearLayout>
 
