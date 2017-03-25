@@ -12,8 +12,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp">
+            android:paddingLeft="@dimen/margin_padding_tiny"
+            android:paddingRight="@dimen/margin_padding_tiny">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/checkout_list_recyclerview"
@@ -29,22 +29,24 @@
                 android:layout_height="match_parent"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:padding="15dp"
+                android:padding="@dimen/margin_padding_normal"
                 android:text="@string/no_item_found"
-                android:textColor="@color/primary"
+                android:textColor="@color/primary_dark"
+                android:textSize="@dimen/text_size_huge"
                 android:textStyle="italic"
                 android:visibility="gone"/>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/linear_layout_totals"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
@@ -53,44 +55,53 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="start"
+                    android:gravity="end"
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="bold"
                     android:text="@string/label_sub_total"/>
 
                 <TextView
                     android:id="@+id/text_view_sub_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
                     android:gravity="right"
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="bold"
                     android:paddingRight="5dp"
                     android:text="@string/label_zero_dollar"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/text_view_tax_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:gravity="start"
+                    android:gravity="end"
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="bold"
                     android:text="@string/label_tax"/>
 
                 <TextView
                     android:id="@+id/text_view_tax"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
                     android:gravity="right"
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="bold"
                     android:paddingRight="5dp"
                     android:text="@string/label_zero_dollar"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="horizontal">
@@ -99,6 +110,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="bold"
                     android:gravity="start"
                     android:text="@string/label_total"/>
 
@@ -107,6 +120,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="@dimen/text_size_small"
+                    android:textStyle="bold"
                     android:gravity="right"
                     android:paddingRight="5dp"
                     android:text="@string/label_zero_dollar"/>
@@ -118,7 +134,7 @@
             android:id="@+id/radio_group_payment_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
             android:orientation="horizontal">
 

@@ -23,4 +23,5 @@
     <string name="image_for_add_itens_to_cart">add itens to cart</string>
     <string name="dialog_title">Title</string>
     <string name="no_item_found">No Item Found in the Cart</string>
+    <string name="customer_name">Customer Name</string>
 </resources>
