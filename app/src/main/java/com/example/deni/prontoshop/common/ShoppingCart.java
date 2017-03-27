@@ -3,14 +3,20 @@ package com.example.deni.prontoshop.common;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.deni.prontoshop.core.ProntoShopApplication;
+import com.example.deni.prontoshop.core.events.CustomerSelectedEvent;
+import com.example.deni.prontoshop.core.events.UpdateToolbarEvent;
 import com.example.deni.prontoshop.model.Customer;
 import com.example.deni.prontoshop.model.LineItem;
 import com.example.deni.prontoshop.util.Constants;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.squareup.otto.Bus;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by deni on 20/03/2017.
@@ -26,9 +32,14 @@ public class ShoppingCart implements ShoppingCartContract{
     private final static String LOG_TAG = ShoppingCart.class.getSimpleName();
     private static boolean DEBUG = true;
 
+    @Inject
+    Bus mBus;
+
     public ShoppingCart(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
+        ProntoShopApplication.getInstance().getAppComponent().inject(this);
         initShoppingCart();
+
     }
 
     private void initShoppingCart() {
@@ -53,6 +64,7 @@ public class ShoppingCart implements ShoppingCartContract{
                 selectedCustomer = gson.fromJson(serializedCustomer, Customer.class);
             }
         }
+        populateToolbar();
     }
 
     public void saveCartToPreferences(){
@@ -77,41 +89,93 @@ public class ShoppingCart implements ShoppingCartContract{
 
     @Override
     public void addItemToCart(LineItem item) {
+        boolean isItemInCart = false;
+        int itemPosition = 0;
+
+        for (LineItem tempItem : shoppingCart){
+            if (tempItem.getId() == item.getId()){
+                itemPosition = shoppingCart.indexOf(tempItem);
+                isItemInCart = true;
+                LineItem selectedItem = shoppingCart.get(itemPosition);
+                selectedItem.setQuantity(tempItem.getQuantity() + item.getQuantity());
+                shoppingCart.set(itemPosition, selectedItem);
+                break;
+            }
+        }
+
+        if (!isItemInCart){
+            shoppingCart.add(item);
+        }
 
     }
 
     @Override
     public void removeItemFromCart(LineItem item) {
-
+        shoppingCart.remove(item);
+        if (shoppingCart.size() == 0 ){
+            mBus.post(new CustomerSelectedEvent(new Customer(), true));
+        }
+        populateToolbar();
     }
 
     @Override
     public void clearAllItemsFromCart() {
+        shoppingCart.clear();
+        selectedCustomer = null;
 
+        editor.putString(Constants.SERIALIZED_CART_ITEMS, "").commit();
+        editor.putString(Constants.SERIALIZED_COSTUMER, "").commit();
+        editor.putBoolean(Constants.OPEN_CART_EXISTS, false).commit();
+        populateToolbar();
+        mBus.post(new CustomerSelectedEvent(new Customer(), true));
     }
 
     @Override
     public List<LineItem> getShoppingCart() {
-        return null;
+        return shoppingCart;
     }
 
     @Override
     public void setCustomer(Customer customer) {
-
+        selectedCustomer = customer;
+        mBus.post(new CustomerSelectedEvent(customer, false));
     }
 
     @Override
     public void updateItemQty(LineItem item, int qty) {
+        boolean itemAlreadyInCart = false;
+        int itemPosition = 0;
 
+        for (LineItem tempItem : shoppingCart) {
+            if (tempItem.getId() == item.getId()) {
+                itemPosition = shoppingCart.indexOf(tempItem);
+                LineItem itemInCart = shoppingCart.get(itemPosition);
+                itemInCart.setQuantity(qty);
+                shoppingCart.set(itemPosition, itemInCart);
+                itemAlreadyInCart = true;
+                break;
+            }
+        }
+        if (!itemAlreadyInCart){
+            item.setQuantity(qty);
+            shoppingCart.add(item);
+        }
+        populateToolbar();
+    }
+
+    private void populateToolbar(){
+        mBus.post(new UpdateToolbarEvent(shoppingCart));
     }
 
     @Override
     public Customer getSelectedCustomer() {
-        return null;
+        return selectedCustomer;
     }
 
     @Override
     public void completeCheckout() {
-
+        shoppingCart.clear();
+        populateToolbar();
+        mBus.post(new CustomerSelectedEvent(new Customer(), true));
     }
 }

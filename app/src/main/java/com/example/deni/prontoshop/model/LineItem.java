@@ -7,6 +7,11 @@ package com.example.deni.prontoshop.model;
 public class LineItem extends Product{
     private int quantity;
 
+    public LineItem(Product product, int quantity) {
+        super(product);
+        this.setQuantity(quantity);
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -15,7 +20,7 @@ public class LineItem extends Product{
         this.quantity = quantity;
     }
 
-    private double getSumPrice(){
+    public double getSumPrice(){
         return getSalePrice() * quantity;
     }
 }
