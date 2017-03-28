@@ -39,6 +39,11 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         this.mListener = listener;
     }
 
+    public void replaceDate(List<Product> products){
+        mProducts = products;
+        notifyDataSetChanged();
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product_list, parent, false);

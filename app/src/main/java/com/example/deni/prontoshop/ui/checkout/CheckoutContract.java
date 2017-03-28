@@ -1,5 +1,6 @@
 package com.example.deni.prontoshop.ui.checkout;
 
+import com.example.deni.prontoshop.core.listeners.OnDataBaseOperationCompleteListener;
 import com.example.deni.prontoshop.model.LineItem;
 import com.example.deni.prontoshop.model.Transaction;
 
@@ -36,7 +37,7 @@ public interface CheckoutContract {
 
     public interface Repository{
         List<LineItem> getAllLineItems();
-        void saveTransaction(Transaction transaction);
-        void updateTransaction(Transaction transaction);
+        void saveTransaction(Transaction transaction, OnDataBaseOperationCompleteListener listener);
+        void updateTransaction(Transaction transaction, OnDataBaseOperationCompleteListener listener);
     }
 }
